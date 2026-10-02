@@ -44,6 +44,7 @@ class Router : public omnetpp::cSimpleModule, public omnetpp::cListener
         omnetpp::cGate* mRadioDriverDataIn;
         omnetpp::cGate* mRadioDriverPropertiesIn;
         std::shared_ptr<NetworkInterface> mNetworkInterface;
+        int routerId;
 };
 
 } // namespace artery

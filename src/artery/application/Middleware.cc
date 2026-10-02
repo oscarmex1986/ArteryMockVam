@@ -79,7 +79,8 @@ void Middleware::initialize(int stage)
         initializeServices(InitStages::Self);
 
         // start update cycle with random jitter to avoid unrealistic node synchronization
-        const auto jitter = uniform(SimTime(0, SIMTIME_MS), mUpdateInterval);
+        const auto jitter = uniform(SimTime(0, SIMTIME_MS), mUpdateInterval*1000);
+        //const auto jitter = uniform(SimTime(0, SIMTIME_MS), SimTime(1000, SIMTIME_MS));
         scheduleAt(simTime() + jitter + mUpdateInterval, mUpdateMessage);
     } else if (stage == InitStages::Propagate) {
         emit(artery::IdentityRegistry::updateSignal, &mIdentity);
@@ -95,7 +96,7 @@ void Middleware::initializeServices(int stage)
         cXMLElement* service_filters = service_cfg->getFirstChildWithTag("filters");
         bool service_applicable = true;
         if (service_filters) {
-            artery::FilterRules rules(getRNG(0), mIdentity);
+            artery::FilterRules rules(getRNG(3), mIdentity);
             service_applicable = rules.applyFilterConfig(*service_filters);
         }
 

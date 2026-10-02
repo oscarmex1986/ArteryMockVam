@@ -7,9 +7,9 @@ simple SecurityEntity like ISecurityEntity
         string runtimeModule;
         string positionModule;
 
-        string CryptoBackend = default("Null");
-        string CertificateProvider = default("Null");
+        string CryptoBackend = default("Null"); //default Null
+        string CertificateProvider = default("Naive"); //default Null OAM Naive
         string CertificateValidator = default("NullOk");
-        string SignService = default("dummy");
-        string VerifyService = default("dummy");
+        string SignService = default("straight"); //default dummy OAM straight
+        string VerifyService = default("straight"); //default dummy OAM straight
 }

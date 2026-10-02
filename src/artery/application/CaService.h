@@ -36,8 +36,9 @@ class CaService : public ItsG5BaseService
 		bool checkHeadingDelta() const;
 		bool checkPositionDelta() const;
 		bool checkSpeedDelta() const;
-		void sendCam(const omnetpp::SimTime&);
+		void sendCam(const omnetpp::SimTime&,const omnetpp::SimTime&);
 		omnetpp::SimTime genCamDcc();
+		omnetpp::SimTime whenWillGateOpen();
 
 		ChannelNumber mPrimaryChannel = channel::CCH;
 		const NetworkInterfaceTable* mNetworkInterfaceTable = nullptr;
@@ -60,6 +61,29 @@ class CaService : public ItsG5BaseService
 		vanetza::units::Velocity mSpeedDelta;
 		bool mDccRestriction;
 		bool mFixedRate;
+
+		/*
+		OAM Variables para las extensiones
+		*/
+		Position mLastReqPosition;
+		vanetza::units::Velocity mLastReqSpeed;
+		vanetza::units::Angle mLastReqHeading;
+		omnetpp::SimTime mTriggerCompensation;
+		omnetpp::SimTime mTReqCam;
+		omnetpp::SimTime mTCam;
+		omnetpp::SimTime mTCamStored;
+		omnetpp::SimTime mTGo;
+		omnetpp::SimTime mNextGateOpening;
+		unsigned long contTx=0; //OAM Contador de CAMs
+		long int myId; //OAM Id para el LLDM
+		const char* nodeName; //OAM Nombre del nodo para el archivo con las métricas
+		int nodeIndex;
+		double delayCamDcc;
+		int flagReqCam = 0;
+		int flagProcedence = 0;
+		bool flagTxd = true;
+		bool tgoExtension = false;
+
 };
 
 vanetza::asn1::Cam createCooperativeAwarenessMessage(const VehicleDataProvider&, uint16_t genDeltaTime);

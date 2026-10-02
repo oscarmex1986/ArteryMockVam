@@ -20,11 +20,11 @@ module Vanetza
             @display("p=150,50;i=misc/globe");
         }
 
-        dcc: <default("FsmDccEntity")> like IDccEntity {
+        dcc: <default("LimericDccEntity")> like IDccEntity {
             @display("p=50,150;i=block/buffer");
         }
 
-        security: <default("")> like ISecurityEntity if typename != "" {
+        security: <default("")> like ISecurityEntity if typename != "" { //artery.networking.SecurityEntity
             @display("p=250,150;i=device/firewall");
         }
 

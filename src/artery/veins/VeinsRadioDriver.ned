@@ -8,6 +8,7 @@ simple RadioDriver like IRadioDriver
 		@class(VeinsRadioDriver);
 		@signal[ChannelLoad](type=double);
 		double channelLoadReportInterval = default(0.1s) @unit(s);
+		//@statistic[ChannelLoad](title="ChannelLoad"; source="ChannelLoad"; record=vector);
 
 	gates:
 		inout upperLayer;

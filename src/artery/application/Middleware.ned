@@ -18,7 +18,7 @@ simple Middleware like IMiddleware
 		@signal[IdentityRemoved](type=artery::Identity);
 		@signal[StoryboardSignal](type=StoryboardSignal);
 
-		double updateInterval = default(0.1s) @unit(s);
+		double updateInterval = default(0.001s) @unit(s);
 		string datetime;
 		xml services;
 		xml mcoPolicy = default(xml("<mco default=\"CCH\" />"));

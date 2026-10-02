@@ -16,6 +16,12 @@
 #include <vanetza/btp/header.hpp>
 #include <vanetza/btp/header_conversion.hpp>
 #include <vanetza/geonet/data_confirm.hpp>
+#include <stdio.h>//OAM
+#include <iostream>//OAM
+#include <cstring>//OAM
+#include "veins/base/utils/FindModule.h" //OAM
+
+
 
 namespace vanetza {
 namespace geonet {
@@ -64,7 +70,7 @@ void Router::initialize(int stage)
         mRouter.reset(new vanetza::geonet::Router(*runtime, mMIB));
         vanetza::MacAddress init_mac = vanetza::create_mac_address(getId());
         mRouter->set_address(generateAddress(init_mac));
-
+        
         // register security entity if available
         if (mSecurityEntity) {
             mRouter->set_security_entity(mSecurityEntity);
@@ -84,6 +90,7 @@ void Router::initialize(int stage)
         mMiddleware->registerNetworkInterface(mNetworkInterface);
 
         omnetpp::createWatch("EPV", mRouter->get_local_position_vector());
+        
     }
 }
 

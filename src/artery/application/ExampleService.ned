@@ -17,4 +17,38 @@ package artery.application;
 
 simple ExampleService like ItsG5Service
 {
+	parameters:
+        @signal[ExaReceived](type=CaObject);
+        @signal[ExaSent](type=CaObject);
+        //@signal[SentExa](type=unsigned long);
+
+        @statistic[reception](source=ExaReceived;record=vector(camStationId)?,vector(camGenerationDeltaTime)?);
+        @statistic[transmission](source=ExaSent;record=vector(camStationId)?,vector(camGenerationDeltaTime)?);
+        //@statistic[SentExa](title="SentExa"; source="SentExa";record=vector);
+        // evaluate DCC transmission interval restrictions
+        bool withDccRestriction = default(false); //OAM Default: true
+
+        // generation interval boundaries
+        double minInterval @unit(s) = default(0.1 s);
+        double maxInterval @unit(s) = default(5.0 s); //OAM Default: 1.0
+        double meanInterval @unit(s) = default(1.0 s);
+
+        // generate at fixed rate (using minInterval, optionally restricted by DCC)
+        bool fixedRate = default(false); //OAM Valor original "false"
+
+        // OAM if true, transport type is GBC. If false, transport type is SHB
+        bool multiHop = default(false); //OAM Valor original "false"
+
+        // change in orientation triggering CAM generation (in degree)
+        double headingDelta = default(4.0);
+
+        // change in position triggering CAM generation
+        double positionDelta @unit(m) = default(4.0m);
+
+        // change in speed triggering CAM generation (in meter/second)
+        double speedDelta @unit(mps) = default(0.5mps);
+
+        // length of path history
+        volatile int pathHistoryLength = default(23);
+	
 }

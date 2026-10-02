@@ -85,7 +85,8 @@ macro(add_opp_run _name)
 
     _opp_run_command(${_target} _exec)
 
-    set(RUN_FLAGS "" CACHE STRING "Flags appended to run command (and debug)")
+    # set(RUN_FLAGS "" CACHE STRING "Flags appended to run command (and debug)")
+    set(RUN_FLAGS "-u Cmdenv -c veins")
     string(REPLACE " " ";" _run_flags "${RUN_FLAGS}")
     add_custom_target(run_${_name}
         COMMAND ${_exec} ${_config} ${_run_flags}

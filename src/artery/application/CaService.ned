@@ -27,6 +27,9 @@ simple CaService like ItsG5Service
         // evaluate DCC transmission interval restrictions
         bool withDccRestriction = default(true);
 
+        // evaluate DCC transmission interval restrictions
+        bool applyGot = default(false);
+
         // generation interval boundaries
         double minInterval @unit(s) = default(0.1s);
         double maxInterval @unit(s) = default(1.0s);
